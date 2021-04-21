@@ -14,10 +14,12 @@ public class MeasureItem {
     @JoinColumn(name = "MEMBER_ID")
     private Measure measure;
 
+    @JoinColumn(nullable = false)
     private int count;
 
     private String data;
 
+    @JoinColumn(nullable = false)
     private int measureCount;
 
 
