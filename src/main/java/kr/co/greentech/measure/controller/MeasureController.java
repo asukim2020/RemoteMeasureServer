@@ -57,4 +57,36 @@ public class MeasureController {
     ) {
         return measureService.findByCountUpMeasureItems(id, count);
     }
+
+    // TODO: - get measure list
+    @GetMapping("/measure/get/list")
+    @ResponseBody
+    public List<Measure> getMeasureList(@RequestParam("name") String name) {
+        return measureService.findByName(name);
+    }
+
+    // TODO: - get measure id
+    @GetMapping("/measure/get")
+    @ResponseBody
+    public Measure getMeasure(@RequestParam("id") Long id) {
+        return measureService.findOne(id);
+    }
+
+    // TODO: - set measure status
+    @GetMapping("/measure/set/status")
+    @ResponseBody
+    public Long setMeasureStatus(
+            @RequestParam("id") Long id,
+            @RequestParam("status") String status
+    ) {
+        return measureService.updateMeasureStatus(id, status).getId();
+    }
+
+    // TODO: - set measure time
+    public Long setMeasureElapsedTime(
+            @RequestParam("id") Long id,
+            @RequestParam("time") String time
+    ) {
+        return measureService.updateMeasureElapsedTime(id, time).getId();
+    }
 }

@@ -19,6 +19,11 @@ public class Measure {
     @Enumerated(EnumType.STRING)
     private MeasureMode mode;
 
+    @Enumerated(EnumType.STRING)
+    private MeasureStatus status;
+
+    private String elapsedTime;
+
 
     public static Measure createMeasure(String name, String mode) {
         Measure measure = new Measure();
@@ -67,5 +72,21 @@ public class Measure {
 
     public void setMode(MeasureMode mode) {
         this.mode = mode;
+    }
+
+    public MeasureStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(MeasureStatus status) {
+        this.status = status;
+    }
+
+    public String getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(String elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 }

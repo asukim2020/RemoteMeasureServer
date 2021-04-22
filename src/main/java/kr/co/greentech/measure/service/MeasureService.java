@@ -48,7 +48,13 @@ public class MeasureService {
         return measureRepository.findByName(name);
     }
 
-    // TODO:- findAfter 만들기 - count 를 인자로 받아 이 후 리스트를 가져오는 로직
+    public Measure updateMeasureStatus(Long id, String status) {
+        return measureRepository.updateStatus(id, status);
+    }
+
+    public Measure updateMeasureElapsedTime(Long id, String time) {
+        return measureRepository.updateElapsedTime(id, time);
+    }
 
     public List<Measure> findAll() {
         return measureRepository.findAll();

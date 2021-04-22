@@ -2,6 +2,7 @@ package kr.co.greentech.measure.repository;
 
 import kr.co.greentech.measure.domain.Measure;
 import kr.co.greentech.measure.domain.MeasureItem;
+import kr.co.greentech.measure.domain.MeasureStatus;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -28,6 +29,23 @@ public class MeasureRepository {
             em.persist(item);
         }
 
+        return measure;
+    }
+
+    public Measure updateStatus(Long id, String status) {
+        Measure measure = findOne(id);
+        if (status.equals("end")) {
+            measure.setStatus(MeasureStatus.END);
+        } else if (status.equals("ing")) {
+            measure.setStatus(MeasureStatus.ING);
+        }
+
+        return measure;
+    }
+
+    public Measure updateElapsedTime(Long id, String time) {
+        Measure measure = findOne(id);
+        measure.setElapsedTime(time);
         return measure;
     }
 

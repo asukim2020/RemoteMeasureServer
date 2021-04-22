@@ -14,14 +14,15 @@ public class MeasureItem {
     @JoinColumn(name = "MEMBER_ID")
     private Measure measure;
 
-    @JoinColumn(nullable = false)
+    @Column(nullable = false)
     private int count;
 
     private String data;
 
-    @JoinColumn(nullable = false)
     private int measureCount;
 
+    @Column(name = "STEP_P")
+    private long stepp;
 
 
     public Long getId() {
@@ -62,5 +63,13 @@ public class MeasureItem {
 
     public void setMeasureCount(int measureCount) {
         this.measureCount = measureCount;
+    }
+
+    public long getStepp() {
+        return stepp;
+    }
+
+    public void setStepp(long stepp) {
+        this.stepp = stepp;
     }
 }
