@@ -52,10 +52,6 @@ public class MeasureService {
         return measureRepository.updateStatus(id, status);
     }
 
-    public Measure updateMeasureElapsedTime(Long id, String time) {
-        return measureRepository.updateElapsedTime(id, time);
-    }
-
     public List<Measure> findAll() {
         return measureRepository.findAll();
     }

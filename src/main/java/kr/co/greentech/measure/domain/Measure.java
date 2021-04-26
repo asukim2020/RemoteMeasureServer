@@ -22,13 +22,10 @@ public class Measure {
     @Enumerated(EnumType.STRING)
     private MeasureStatus status;
 
-    private String elapsedTime;
-
 
     public static Measure createMeasure(String name, String mode) {
         Measure measure = new Measure();
         measure.setName(name);
-        measure.setElapsedTime("00:00:00");
         measure.setStatus(MeasureStatus.ING);
 
         if (mode.equals("step")) {
@@ -84,11 +81,4 @@ public class Measure {
         this.status = status;
     }
 
-    public String getElapsedTime() {
-        return elapsedTime;
-    }
-
-    public void setElapsedTime(String elapsedTime) {
-        this.elapsedTime = elapsedTime;
-    }
 }

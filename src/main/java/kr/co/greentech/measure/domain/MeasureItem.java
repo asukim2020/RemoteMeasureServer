@@ -24,6 +24,7 @@ public class MeasureItem {
     @Column(name = "STEP_P")
     private long stepp;
 
+    private String elapsedTime;
 
     public Long getId() {
         return id;
@@ -71,5 +72,13 @@ public class MeasureItem {
 
     public void setStepp(long stepp) {
         this.stepp = stepp;
+    }
+
+    public String getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(String elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 }

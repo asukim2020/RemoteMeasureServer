@@ -60,15 +60,6 @@ public class MeasureController {
         return measureService.updateMeasureStatus(id, status).getId();
     }
 
-    @PostMapping("/measure/set/elapsedtime")
-    @ResponseBody
-    public Long setMeasureElapsedTime(
-            @RequestParam("id") Long id,
-            @RequestParam("time") String time
-    ) {
-        return measureService.updateMeasureElapsedTime(id, time).getId();
-    }
-
     // TODO: - get measure list
     @GetMapping("/measure/get/list")
     @ResponseBody

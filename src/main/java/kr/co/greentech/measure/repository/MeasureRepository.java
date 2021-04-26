@@ -43,12 +43,6 @@ public class MeasureRepository {
         return measure;
     }
 
-    public Measure updateElapsedTime(Long id, String time) {
-        Measure measure = findOne(id);
-        measure.setElapsedTime(time);
-        return measure;
-    }
-
     public Measure findOne(Long id) {
         return em.find(Measure.class, id);
     }
