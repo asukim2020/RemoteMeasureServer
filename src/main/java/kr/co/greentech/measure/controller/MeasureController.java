@@ -14,13 +14,6 @@ public class MeasureController {
 
     @Autowired MeasureService measureService;
 
-//    @GetMapping("/measure")
-//    @ResponseBody
-//    public Measure measure() {
-//        Long id = measureService.measureStart("asu");
-//        return measureService.findOne(id);
-//    }
-
 
     @PostMapping("/measure/post/start")
     @ResponseBody
@@ -30,6 +23,7 @@ public class MeasureController {
     ) {
         return measureService.measureStart(name, mode);
     }
+
 
     @PostMapping("/measure/post/items")
     @ResponseBody
@@ -42,6 +36,7 @@ public class MeasureController {
         return measure.getId();
     }
 
+
     @GetMapping("/measure/get/items/count")
     @ResponseBody
     public List<MeasureItem> getMeasureItems(
@@ -50,6 +45,7 @@ public class MeasureController {
     ) {
         return measureService.findByCountUpMeasureItems(id, count);
     }
+
 
     @PostMapping("/measure/set/status")
     @ResponseBody
@@ -60,18 +56,19 @@ public class MeasureController {
         return measureService.updateMeasureStatus(id, status).getId();
     }
 
-    // TODO: - get measure list
+
     @GetMapping("/measure/get/list")
     @ResponseBody
     public List<Measure> getMeasureList(@RequestParam("name") String name) {
         return measureService.findByName(name);
     }
 
-    // TODO: - get measure id
+
     @GetMapping("/measure/get")
     @ResponseBody
     public Measure getMeasure(@RequestParam("id") Long id) {
         return measureService.findOne(id);
     }
 
+    
 }
