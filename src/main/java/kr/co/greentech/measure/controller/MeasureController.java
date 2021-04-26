@@ -12,8 +12,7 @@ import java.util.List;
 @Controller
 public class MeasureController {
 
-    @Autowired
-    MeasureService measureService;
+    @Autowired MeasureService measureService;
 
 //    @GetMapping("/measure")
 //    @ResponseBody
@@ -43,12 +42,6 @@ public class MeasureController {
         return measure.getId();
     }
 
-    @GetMapping("/measure/get/items")
-    @ResponseBody
-    public List<MeasureItem> getMeasureItems(@RequestParam("id") Long id) {
-        return measureService.findByMeasureId(id);
-    }
-
     @GetMapping("/measure/get/items/count")
     @ResponseBody
     public List<MeasureItem> getMeasureItems(
@@ -56,6 +49,24 @@ public class MeasureController {
             @RequestParam("count") Integer count
     ) {
         return measureService.findByCountUpMeasureItems(id, count);
+    }
+
+    @PostMapping("/measure/set/status")
+    @ResponseBody
+    public Long setMeasureStatus(
+            @RequestParam("id") Long id,
+            @RequestParam("status") String status
+    ) {
+        return measureService.updateMeasureStatus(id, status).getId();
+    }
+
+    @PostMapping("/measure/set/elapsedtime")
+    @ResponseBody
+    public Long setMeasureElapsedTime(
+            @RequestParam("id") Long id,
+            @RequestParam("time") String time
+    ) {
+        return measureService.updateMeasureElapsedTime(id, time).getId();
     }
 
     // TODO: - get measure list
@@ -72,21 +83,4 @@ public class MeasureController {
         return measureService.findOne(id);
     }
 
-    // TODO: - set measure status
-    @GetMapping("/measure/set/status")
-    @ResponseBody
-    public Long setMeasureStatus(
-            @RequestParam("id") Long id,
-            @RequestParam("status") String status
-    ) {
-        return measureService.updateMeasureStatus(id, status).getId();
-    }
-
-    // TODO: - set measure time
-    public Long setMeasureElapsedTime(
-            @RequestParam("id") Long id,
-            @RequestParam("time") String time
-    ) {
-        return measureService.updateMeasureElapsedTime(id, time).getId();
-    }
 }
