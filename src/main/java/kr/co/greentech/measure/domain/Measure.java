@@ -28,6 +28,8 @@ public class Measure {
     public static Measure createMeasure(String name, String mode) {
         Measure measure = new Measure();
         measure.setName(name);
+        measure.setElapsedTime("00:00:00");
+        measure.setStatus(MeasureStatus.ING);
 
         if (mode.equals("step")) {
             measure.setMode(MeasureMode.STEP);
