@@ -9,7 +9,7 @@ public class Measure {
     @Id
     @GeneratedValue
     @Column(name = "MEASURE_ID")
-    private Long id;
+    private Long measureId;
 
     private String name;
 
@@ -41,12 +41,12 @@ public class Measure {
 
 
 
-    public Long getId() {
-        return id;
+    public Long getMeasureId() {
+        return measureId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMeasureId(Long measureId) {
+        this.measureId = measureId;
     }
 
     public String getName() {

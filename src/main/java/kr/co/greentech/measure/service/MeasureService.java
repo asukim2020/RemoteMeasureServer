@@ -36,10 +36,6 @@ public class MeasureService {
         return measureRepository.findOne(id);
     }
 
-    public List<MeasureItem> findByMeasureId(Long id) {
-        return measureItemRepository.findByMeasureItems(id);
-    }
-
     public List<MeasureItem> findByCountUpMeasureItems(Long id, Integer count) {
         return measureItemRepository.findByCountUpMeasureItems(id, count);
     }

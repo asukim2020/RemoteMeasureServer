@@ -33,7 +33,7 @@ public class MeasureController {
     ) {
 
         Measure measure = measureService.addMeasureItems(id, items);
-        return measure.getId();
+        return measure.getMeasureId();
     }
 
 
@@ -53,7 +53,7 @@ public class MeasureController {
             @RequestParam("id") Long id,
             @RequestParam("status") String status
     ) {
-        return measureService.updateMeasureStatus(id, status).getId();
+        return measureService.updateMeasureStatus(id, status).getMeasureId();
     }
 
 
