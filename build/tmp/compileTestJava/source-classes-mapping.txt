@@ -1,4 +1,2 @@
-kr/co/greentech/measure/MeasureApplicationTests.java
- kr.co.greentech.measure.MeasureApplicationTests
 kr/co/greentech/measure/service/MeasureServiceTest.java
  kr.co.greentech.measure.service.MeasureServiceTest
