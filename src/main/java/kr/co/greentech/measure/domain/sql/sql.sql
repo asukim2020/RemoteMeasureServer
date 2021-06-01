@@ -21,7 +21,7 @@ create table measure_item (
     elapsed_time varchar(255),
     measure_count integer not null,
     step_p bigint,
-    member_id bigint,
+    measure_id bigint,
     primary key (measure_item_id)
 ) engine=InnoDB;
 
