@@ -4,6 +4,7 @@ import kr.co.greentech.measure.domain.Measure;
 import kr.co.greentech.measure.domain.MeasureItem;
 import kr.co.greentech.measure.domain.MeasureStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +20,7 @@ public class MeasureRepository {
         em.persist(measure);
     }
 
+    @Transactional
     public Measure addMeasureItems(
             Long id,
             List<MeasureItem> items
