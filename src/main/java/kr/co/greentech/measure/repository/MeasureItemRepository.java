@@ -44,10 +44,12 @@ public class MeasureItemRepository {
                         "select distinct i " +
                                 "from MeasureItem i " +
                                 "inner join i.measure m " +
-                                "where m.id = :id and i.count >= :count",
+                                "where m.id = :id and i.count >= :count " +
+                                "order by i.count",
                         MeasureItem.class
                 ).setParameter("count", count)
                 .setParameter("id", id)
+                .setMaxResults(1000)
                 .getResultList();
     }
 
