@@ -53,4 +53,25 @@ public class MeasureItemRepository {
                 .getResultList();
     }
 
+    public List<MeasureItem> findByTimeMeasureItems(
+            Long id,
+            Long startTime,
+            Long endTime,
+            Long afterId
+    ) {
+        return em
+                .createQuery(
+                        "select distinct i " +
+                                "from MeasureItem i " +
+                                "inner join i.measure m " +
+                                "where m.id = :id and i.time >= :startTime and i.time <= :endTime and i.id > :afterId " +
+                                "order by i.time",
+                        MeasureItem.class
+                ).setParameter("id", id)
+                .setParameter("startTime", startTime)
+                .setParameter("endTime", endTime)
+                .setParameter("afterId", afterId)
+                .setMaxResults(1000)
+                .getResultList();
+    }
 }

@@ -18,10 +18,9 @@ public class MeasureController {
     @PostMapping("/measure/post/start")
     @ResponseBody
     public Measure measureStart(
-            @RequestParam("name") String name,
-            @RequestParam("mode") String mode
+            @RequestParam("name") String name
     ) {
-        return measureService.measureStart(name, mode);
+        return measureService.measureStart(name);
     }
 
 
@@ -37,13 +36,24 @@ public class MeasureController {
     }
 
 
-    @GetMapping("/measure/get/items/count")
+//    @GetMapping("/measure/get/items/count")
+//    @ResponseBody
+//    public List<MeasureItem> getMeasureItems(
+//            @RequestParam("id") Long id,
+//            @RequestParam("count") Integer count
+//    ) {
+//        return measureService.findByCountUpMeasureItems(id, count);
+//    }
+
+    @GetMapping("/measure/get/items/time")
     @ResponseBody
     public List<MeasureItem> getMeasureItems(
             @RequestParam("id") Long id,
-            @RequestParam("count") Integer count
+            @RequestParam("startTime") Long startTime,
+            @RequestParam("endTime") Long endTime,
+            @RequestParam("afterId") Long afterId
     ) {
-        return measureService.findByCountUpMeasureItems(id, count);
+        return measureService.findByTimeMeasureItems(id, startTime, endTime, afterId);
     }
 
 

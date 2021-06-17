@@ -18,8 +18,8 @@ public class MeasureService {
     @Autowired MeasureRepository measureRepository;
 
 
-    public Measure measureStart(String name, String mode) {
-        Measure measure = Measure.createMeasure(name, mode);
+    public Measure measureStart(String name) {
+        Measure measure = Measure.createMeasure(name);
         measureRepository.save(measure);
         return measure;
     }
@@ -38,6 +38,15 @@ public class MeasureService {
 
     public List<MeasureItem> findByCountUpMeasureItems(Long id, Integer count) {
         return measureItemRepository.findByCountUpMeasureItems(id, count);
+    }
+
+    public List<MeasureItem> findByTimeMeasureItems(
+            Long id,
+            Long startTime,
+            Long endTime,
+            Long afterId
+    ) {
+        return measureItemRepository.findByTimeMeasureItems(id, startTime, endTime, afterId);
     }
 
     public List<Measure> findByName(String name) {
