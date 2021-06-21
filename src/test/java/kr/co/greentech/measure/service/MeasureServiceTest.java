@@ -11,15 +11,10 @@ import javax.persistence.PersistenceContext;
 @Transactional
 class MeasureServiceTest {
 
-    @PersistenceContext
-    private EntityManager em;
-
-    MeasureService measureService = new MeasureService();
-    MeasureRepository measureRepository = new MeasureRepository();
-
     @Test
     void measureStart() {
-        Measure measure = Measure.createMeasure("asu", "step");
-        em.persist(measure);
+
     }
+
+
 }

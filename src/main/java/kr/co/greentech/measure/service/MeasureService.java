@@ -2,8 +2,10 @@ package kr.co.greentech.measure.service;
 
 import kr.co.greentech.measure.domain.Measure;
 import kr.co.greentech.measure.domain.MeasureItem;
+import kr.co.greentech.measure.domain.SensorItem;
 import kr.co.greentech.measure.repository.MeasureItemRepository;
 import kr.co.greentech.measure.repository.MeasureRepository;
+import kr.co.greentech.measure.repository.SensorItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +18,7 @@ public class MeasureService {
 
     @Autowired MeasureItemRepository measureItemRepository;
     @Autowired MeasureRepository measureRepository;
-
+    @Autowired SensorItemRepository sensorItemRepository;
 
     public Measure measureStart(String name) {
         Measure measure = Measure.createMeasure(name);
@@ -59,5 +61,13 @@ public class MeasureService {
 
     public List<Measure> findAll() {
         return measureRepository.findAll();
+    }
+
+    public List<SensorItem> getSensorItems(Long id) {
+        return sensorItemRepository.getSensorItems(id);
+    }
+
+    public Measure setSensorSetting(Long id, List<SensorItem> items) {
+        return sensorItemRepository.setSensorSetting(id, items);
     }
 }

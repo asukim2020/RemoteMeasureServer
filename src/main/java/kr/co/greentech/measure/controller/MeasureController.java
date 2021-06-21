@@ -2,6 +2,7 @@ package kr.co.greentech.measure.controller;
 
 import kr.co.greentech.measure.domain.Measure;
 import kr.co.greentech.measure.domain.MeasureItem;
+import kr.co.greentech.measure.domain.SensorItem;
 import kr.co.greentech.measure.service.MeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,5 +81,19 @@ public class MeasureController {
         return measureService.findOne(id);
     }
 
-    
+
+    @GetMapping("/measure/sensor/get/list")
+    @ResponseBody
+    public List<SensorItem> getSensorItems(@RequestParam("id") Long id) {
+        return measureService.getSensorItems(id);
+    }
+
+    @PostMapping("/measure/sensor/set/list")
+    @ResponseBody
+    public Measure setMeasureStatus(
+            @RequestParam("id") Long id,
+            @RequestBody List<SensorItem> items
+    ) {
+        return measureService.setSensorSetting(id, items);
+    }
 }
