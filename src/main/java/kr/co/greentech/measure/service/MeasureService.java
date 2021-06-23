@@ -1,8 +1,10 @@
 package kr.co.greentech.measure.service;
 
+import kr.co.greentech.measure.domain.Company;
 import kr.co.greentech.measure.domain.Measure;
 import kr.co.greentech.measure.domain.MeasureItem;
 import kr.co.greentech.measure.domain.SensorItem;
+import kr.co.greentech.measure.repository.CompanyRepository;
 import kr.co.greentech.measure.repository.MeasureItemRepository;
 import kr.co.greentech.measure.repository.MeasureRepository;
 import kr.co.greentech.measure.repository.SensorItemRepository;
@@ -11,17 +13,50 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class MeasureService {
 
-    @Autowired MeasureItemRepository measureItemRepository;
+    @Autowired CompanyRepository companyRepository;
     @Autowired MeasureRepository measureRepository;
+    @Autowired MeasureItemRepository measureItemRepository;
     @Autowired SensorItemRepository sensorItemRepository;
 
-    public Measure measureStart(String name) {
-        Measure measure = Measure.createMeasure(name);
+
+    public Company joinCompany(
+            String name,
+            String ip
+    ) {
+        Company item = companyRepository.findOne(name);
+        if (item != null) {
+            return companyRepository.updateIp(name, ip);
+        } else {
+            Company company = Company.create(name, ip);
+            companyRepository.save(company);
+            return company;
+        }
+    }
+
+
+    public Company findCompany(Long id) {
+        return companyRepository.findOne(id);
+    }
+
+
+    public Company findCompany(String name) {
+        return companyRepository.findOne(name);
+    }
+
+
+    public Measure measureStart(
+            Long id,
+            String name
+    ) {
+        Company company = companyRepository.findOne(id);
+        Measure measure = Measure.create(name);
+        measure.setCompany(company);
         measureRepository.save(measure);
         return measure;
     }
@@ -38,10 +73,6 @@ public class MeasureService {
         return measureRepository.findOne(id);
     }
 
-    public List<MeasureItem> findByCountUpMeasureItems(Long id, Integer count) {
-        return measureItemRepository.findByCountUpMeasureItems(id, count);
-    }
-
     public List<MeasureItem> findByTimeMeasureItems(
             Long id,
             Long startTime,
@@ -55,7 +86,10 @@ public class MeasureService {
         return measureRepository.findByName(name);
     }
 
-    public Measure updateMeasureStatus(Long id, String status) {
+    public Measure updateMeasureStatus(
+            Long id,
+            String status
+    ) {
         return measureRepository.updateStatus(id, status);
     }
 
@@ -67,7 +101,10 @@ public class MeasureService {
         return sensorItemRepository.getSensorItems(id);
     }
 
-    public Measure setSensorSetting(Long id, List<SensorItem> items) {
+    public Measure setSensorSetting(
+            Long id,
+            List<SensorItem> items
+    ) {
         return sensorItemRepository.setSensorSetting(id, items);
     }
 }

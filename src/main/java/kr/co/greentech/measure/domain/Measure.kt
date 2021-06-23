@@ -15,9 +15,13 @@ class Measure {
     @Enumerated(EnumType.STRING)
     var status: MeasureStatus? = null
 
+    @ManyToOne
+    @JoinColumn(name = "COMPANY_ID")
+    var company: Company? = null
+
     companion object {
         @JvmStatic
-        fun createMeasure(name: String): Measure {
+        fun create(name: String): Measure {
             val measure = Measure()
             measure.name = name
             measure.status = MeasureStatus.ING

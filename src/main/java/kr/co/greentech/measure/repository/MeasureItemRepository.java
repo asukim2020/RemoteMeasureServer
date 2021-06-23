@@ -38,21 +38,6 @@ public class MeasureItemRepository {
                 .getResultList();
     }
 
-    public List<MeasureItem> findByCountUpMeasureItems(Long id, Integer count) {
-        return em
-                .createQuery(
-                        "select distinct i " +
-                                "from MeasureItem i " +
-                                "inner join i.measure m " +
-                                "where m.id = :id and i.count >= :count " +
-                                "order by i.count",
-                        MeasureItem.class
-                ).setParameter("count", count)
-                .setParameter("id", id)
-                .setMaxResults(1000)
-                .getResultList();
-    }
-
     public List<MeasureItem> findByTimeMeasureItems(
             Long id,
             Long startTime,
@@ -64,7 +49,10 @@ public class MeasureItemRepository {
                         "select distinct i " +
                                 "from MeasureItem i " +
                                 "inner join i.measure m " +
-                                "where m.id = :id and i.time >= :startTime and i.time <= :endTime and i.id > :afterId " +
+                                "where m.id = :id " +
+                                "and i.time >= :startTime " +
+                                "and i.time <= :endTime " +
+                                "and i.id > :afterId " +
                                 "order by i.time",
                         MeasureItem.class
                 ).setParameter("id", id)

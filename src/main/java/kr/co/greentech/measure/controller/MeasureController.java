@@ -1,5 +1,6 @@
 package kr.co.greentech.measure.controller;
 
+import kr.co.greentech.measure.domain.Company;
 import kr.co.greentech.measure.domain.Measure;
 import kr.co.greentech.measure.domain.MeasureItem;
 import kr.co.greentech.measure.domain.SensorItem;
@@ -16,12 +17,41 @@ public class MeasureController {
     @Autowired MeasureService measureService;
 
 
+    @PostMapping("/measure/post/company")
+    @ResponseBody
+    public Company joinCompany(
+            @RequestParam("name") String name,
+            @RequestParam("ip") String ip
+    ) {
+        return measureService.joinCompany(name, ip);
+    }
+
+
+    @GetMapping("/measure/get/company/id")
+    @ResponseBody
+    public Company findCompany(
+            @RequestParam("id") Long id
+    ) {
+        return measureService.findCompany(id);
+    }
+
+
+    @GetMapping("/measure/get/company/name")
+    @ResponseBody
+    public Company findCompany(
+            @RequestParam("name") String name
+    ) {
+        return measureService.findCompany(name);
+    }
+
+
     @PostMapping("/measure/post/start")
     @ResponseBody
     public Measure measureStart(
+            @RequestParam("id") Long id,
             @RequestParam("name") String name
     ) {
-        return measureService.measureStart(name);
+        return measureService.measureStart(id, name);
     }
 
 
@@ -36,15 +66,6 @@ public class MeasureController {
         return measure.getMeasureId();
     }
 
-
-//    @GetMapping("/measure/get/items/count")
-//    @ResponseBody
-//    public List<MeasureItem> getMeasureItems(
-//            @RequestParam("id") Long id,
-//            @RequestParam("count") Integer count
-//    ) {
-//        return measureService.findByCountUpMeasureItems(id, count);
-//    }
 
     @GetMapping("/measure/get/items/time")
     @ResponseBody
@@ -87,6 +108,7 @@ public class MeasureController {
     public List<SensorItem> getSensorItems(@RequestParam("id") Long id) {
         return measureService.getSensorItems(id);
     }
+
 
     @PostMapping("/measure/sensor/set/list")
     @ResponseBody
