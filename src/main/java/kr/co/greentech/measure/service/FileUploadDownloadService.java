@@ -1,12 +1,17 @@
 package kr.co.greentech.measure.service;
 
+import kr.co.greentech.measure.domain.MeasureFile;
+import kr.co.greentech.measure.repository.FileUploadDownloadRepository;
+import kr.co.greentech.measure.repository.SensorItemRepository;
 import kr.co.greentech.measure.util.FileDownloadException;
 import kr.co.greentech.measure.util.FileUploadException;
 import kr.co.greentech.measure.util.FileUploadProperties;
+import kr.co.greentech.measure.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,34 +20,61 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class FileUploadDownloadService {
-
-    private final Path fileLocation;
+    private final FileUploadProperties prop;
 
     @Autowired
-    public FileUploadDownloadService(FileUploadProperties prop) {
-        this.fileLocation = Paths.get(prop.getUploadDir())
-                .toAbsolutePath().normalize();
+    FileUploadDownloadRepository fileRepository;
 
+    private Path getFilePath(FilePath path) {
+        return Paths.get(prop.getUploadDir() + FileUtil.INSTANCE.getTimeString() + path).toAbsolutePath().normalize();
+    }
+
+    private Path getFilePath(FilePath path, Date date) {
+        return Paths.get(prop.getUploadDir() + FileUtil.INSTANCE.getTimeString(date) + path).toAbsolutePath().normalize();
+    }
+
+    private void createFileDirectory(FilePath path) {
+        Path fileLocation = getFilePath(path);
         try {
-            Files.createDirectories(this.fileLocation);
+            Files.createDirectories(fileLocation);
         }catch(Exception e) {
             throw new FileUploadException("파일을 업로드할 디렉토리를 생성하지 못했습니다.", e);
         }
     }
 
+    @Autowired
+    public FileUploadDownloadService(FileUploadProperties prop) {
+        this.prop = prop;
 
-    public String storeFile(MultipartFile file) {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        FilePath[] values = FilePath.values();
+        for (int i=0; i<FilePath.values().length; i++) {
+            createFileDirectory(values[i]);
+        }
+    }
+
+    public List<MeasureFile> findTypeAll(String type, Long startTime, Long endTime) {
+        return fileRepository.findTypeAll(type, startTime, endTime);
+    }
+
+    public void deleteFiles(Date date) {
+        FileUtil.INSTANCE.deleteFiles(date, prop.getUploadDir());
+    }
+
+    public String storeFile(MultipartFile file, FilePath path) {
+        String fileName = StringUtils.cleanPath(path.toString().replace("/", "") + FileUtil.INSTANCE.getHourString() + ".csv");
 
         try {
             // 파일명에 부적합 문자가 있는지 확인한다.
             if(fileName.contains(".."))
                 throw new FileUploadException("파일명에 부적합 문자가 포함되어 있습니다. " + fileName);
 
-            Path targetLocation = this.fileLocation.resolve(fileName);
+            createFileDirectory(path);
+            Path targetLocation = getFilePath(path).resolve(fileName);
 
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
@@ -52,10 +84,14 @@ public class FileUploadDownloadService {
         }
     }
 
+    @Transactional
+    public void saveMeasureFile(MeasureFile file) {
+        fileRepository.save(file);
+    }
 
-    public Resource loadFileAsResource(String fileName) {
+    public Resource loadFileAsResource(String fileName, FilePath path, Date date) {
         try {
-            Path filePath = this.fileLocation.resolve(fileName).normalize();
+            Path filePath = getFilePath(path, date).resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
 
             if(resource.exists()) {
