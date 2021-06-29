@@ -94,11 +94,18 @@ public class FileUploadController {
         return uploadFile(file, FilePath.TRIGGER);
     }
 
-    @PostMapping("/file/upload/request")
-    public FileUploadResponse requestUploadFile(
+    @PostMapping("/file/upload/slope/request")
+    public FileUploadResponse slopeRequestUploadFile(
             @RequestParam("file") MultipartFile file
     ) {
-        return uploadFile(file, FilePath.REQUEST);
+        return uploadFile(file, FilePath.SLOPE_REQUEST);
+    }
+
+    @PostMapping("/file/upload/accel/request")
+    public FileUploadResponse accelRequestUploadFile(
+            @RequestParam("file") MultipartFile file
+    ) {
+        return uploadFile(file, FilePath.ACCEL_REQUEST);
     }
 
 
@@ -172,13 +179,22 @@ public class FileUploadController {
         return downloadFile(fileName, request, FilePath.TRIGGER, new Date(time));
     }
 
-    @GetMapping("/file/download/request/{fileName:.+}")
-    public ResponseEntity<Resource> requestDownloadFile(
+    @GetMapping("/file/download/slope/request/{fileName:.+}")
+    public ResponseEntity<Resource> slopeRequestDownloadFile(
             @PathVariable String fileName,
             HttpServletRequest request,
             @RequestParam("time") Long time
     ){
-        return downloadFile(fileName, request, FilePath.REQUEST, new Date(time));
+        return downloadFile(fileName, request, FilePath.SLOPE_REQUEST, new Date(time));
+    }
+
+    @GetMapping("/file/download/accel/request/{fileName:.+}")
+    public ResponseEntity<Resource> accelRequestDownloadFile(
+            @PathVariable String fileName,
+            HttpServletRequest request,
+            @RequestParam("time") Long time
+    ){
+        return downloadFile(fileName, request, FilePath.ACCEL_REQUEST, new Date(time));
     }
 }
 

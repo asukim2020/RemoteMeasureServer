@@ -16,9 +16,14 @@ enum class FilePath {
             return "/trigger"
         }
     },
-    REQUEST {
+    SLOPE_REQUEST {
         override fun toString(): String {
-            return "/request"
+            return "/slope/request"
+        }
+    },
+    ACCEL_REQUEST {
+        override fun toString(): String {
+            return "/accel/request"
         }
     }
 }
