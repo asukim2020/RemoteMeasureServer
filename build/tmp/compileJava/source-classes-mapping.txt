@@ -1,9 +1,9 @@
 kr/co/greentech/measure/controller/MeasureController.java
  kr.co.greentech.measure.controller.MeasureController
-kr/co/greentech/measure/util/FileUploadException.java
- kr.co.greentech.measure.util.FileUploadException
-kr/co/greentech/measure/util/FileUploadProperties.java
- kr.co.greentech.measure.util.FileUploadProperties
+kr/co/greentech/measure/repository/FileUploadDownloadRepository.java
+ kr.co.greentech.measure.repository.FileUploadDownloadRepository
+kr/co/greentech/measure/service/FileUploadDownloadService.java
+ kr.co.greentech.measure.service.FileUploadDownloadService
 kr/co/greentech/measure/repository/MeasureRepository.java
  kr.co.greentech.measure.repository.MeasureRepository
 kr/co/greentech/measure/MeasureApplication.java
@@ -20,9 +20,9 @@ kr/co/greentech/measure/util/FileUploadResponse.java
  kr.co.greentech.measure.util.FileUploadResponse
 kr/co/greentech/measure/repository/CompanyRepository.java
  kr.co.greentech.measure.repository.CompanyRepository
-kr/co/greentech/measure/repository/FileUploadDownloadRepository.java
- kr.co.greentech.measure.repository.FileUploadDownloadRepository
-kr/co/greentech/measure/service/FileUploadDownloadService.java
- kr.co.greentech.measure.service.FileUploadDownloadService
+kr/co/greentech/measure/util/FileUploadProperties.java
+ kr.co.greentech.measure.util.FileUploadProperties
 kr/co/greentech/measure/controller/FileUploadController.java
  kr.co.greentech.measure.controller.FileUploadController
+kr/co/greentech/measure/util/FileUploadException.java
+ kr.co.greentech.measure.util.FileUploadException
