@@ -60,10 +60,8 @@ public class FileUploadController {
     }
 
     @PostMapping("/file/delete")
-    private void deleteFiles(
-            @RequestParam("time") Long time
-    ) {
-        service.deleteFiles(new Date(time));
+    private void deleteFiles() {
+        service.deleteFiles();
     }
 
     @GetMapping("/file/find")

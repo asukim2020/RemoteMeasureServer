@@ -6,12 +6,16 @@ import java.util.*
 object FileUtil {
 
     fun deleteFiles(date: Date, path: String) {
-        val deleteDate = date.prevWeek.startOfWeek
+        val deleteDate = date.prevWeek.prevWeek.startOfWeek
 
-        for (i in -14 until 0) {
-            val nextDate = deleteDate.getNextDay(i)
-            val file = File(path + "/" + date.toString_yyyyMMdd())
-            removeDir(file)
+        for (i in -365 until 0) {
+            try {
+                val nextDate = deleteDate.getNextDay(i)
+                val file = File(path + "/" + nextDate.toString_yyyyMMdd())
+                removeDir(file)
+            } catch (e: Exception) {
+
+            }
         }
     }
 

@@ -61,8 +61,8 @@ public class FileUploadDownloadService {
         return fileRepository.findTypeAll(type, startTime, endTime);
     }
 
-    public void deleteFiles(Date date) {
-        FileUtil.INSTANCE.deleteFiles(date, prop.getUploadDir());
+    public void deleteFiles() {
+        FileUtil.INSTANCE.deleteFiles(new Date(), prop.getUploadDir());
     }
 
     public String storeFile(MultipartFile file, FilePath path) {
