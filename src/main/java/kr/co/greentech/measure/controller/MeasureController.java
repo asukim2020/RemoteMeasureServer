@@ -1,9 +1,6 @@
 package kr.co.greentech.measure.controller;
 
-import kr.co.greentech.measure.domain.Company;
-import kr.co.greentech.measure.domain.Measure;
-import kr.co.greentech.measure.domain.MeasureItem;
-import kr.co.greentech.measure.domain.SensorItem;
+import kr.co.greentech.measure.domain.*;
 import kr.co.greentech.measure.service.MeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +13,29 @@ public class MeasureController {
 
     @Autowired MeasureService measureService;
 
+    @GetMapping("/measure/post/setting")
+    @ResponseBody
+    public MeasureSetting setMeasureSetting(
+            @RequestParam("accel") String accel,
+            @RequestParam("slope") String slope,
+            @RequestParam("triggerLevel") String triggerLevel,
+            @RequestParam("standardTime") String standardTime,
+            @RequestParam("request") String request
+    ) {
+        return measureService.setMeasureSetting(
+                accel,
+                slope,
+                triggerLevel,
+                standardTime,
+                request
+        );
+    }
+
+    @GetMapping("/measure/get/setting")
+    @ResponseBody
+    public MeasureSetting getMeasureSetting() {
+        return measureService.getMeasureSetting();
+    }
 
     @PostMapping("/measure/post/company")
     @ResponseBody

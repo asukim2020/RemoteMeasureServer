@@ -1,19 +1,12 @@
 package kr.co.greentech.measure.service;
 
-import kr.co.greentech.measure.domain.Company;
-import kr.co.greentech.measure.domain.Measure;
-import kr.co.greentech.measure.domain.MeasureItem;
-import kr.co.greentech.measure.domain.SensorItem;
-import kr.co.greentech.measure.repository.CompanyRepository;
-import kr.co.greentech.measure.repository.MeasureItemRepository;
-import kr.co.greentech.measure.repository.MeasureRepository;
-import kr.co.greentech.measure.repository.SensorItemRepository;
+import kr.co.greentech.measure.domain.*;
+import kr.co.greentech.measure.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,7 +16,40 @@ public class MeasureService {
     @Autowired MeasureRepository measureRepository;
     @Autowired MeasureItemRepository measureItemRepository;
     @Autowired SensorItemRepository sensorItemRepository;
+    @Autowired MeasureSettingRepository measureSettingRepository;
 
+    public MeasureSetting setMeasureSetting(
+            String accel,
+            String slope,
+            String triggerLevel,
+            String standardTime,
+            String request
+    ) {
+        MeasureSetting measureSetting = new MeasureSetting();
+        measureSetting.setAccel(accel);
+        measureSetting.setSlope(slope);
+        measureSetting.setTriggerLevel(triggerLevel);
+        measureSetting.setStandardTime(standardTime);
+        measureSetting.setRequest(request);
+
+        List<MeasureSetting> items = measureSettingRepository.findAll();
+
+        if (items.isEmpty()) {
+            measureSettingRepository.save(measureSetting);
+            return measureSetting;
+        } else {
+            return measureSettingRepository.update(measureSetting);
+        }
+    }
+
+    public MeasureSetting getMeasureSetting() {
+        List<MeasureSetting> items = measureSettingRepository.findAll();
+        if (items.isEmpty()) {
+            return null;
+        } else {
+            return items.stream().findFirst().get();
+        }
+    }
 
     public Company joinCompany(
             String name,
