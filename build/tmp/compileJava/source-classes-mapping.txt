@@ -1,5 +1,5 @@
-kr/co/greentech/measure/controller/MeasureController.java
- kr.co.greentech.measure.controller.MeasureController
+kr/co/greentech/measure/repository/MeasureSettingRepository.java
+ kr.co.greentech.measure.repository.MeasureSettingRepository
 kr/co/greentech/measure/repository/FileUploadDownloadRepository.java
  kr.co.greentech.measure.repository.FileUploadDownloadRepository
 kr/co/greentech/measure/service/FileUploadDownloadService.java
@@ -26,3 +26,5 @@ kr/co/greentech/measure/controller/FileUploadController.java
  kr.co.greentech.measure.controller.FileUploadController
 kr/co/greentech/measure/util/FileUploadException.java
  kr.co.greentech.measure.util.FileUploadException
+kr/co/greentech/measure/controller/MeasureController.java
+ kr.co.greentech.measure.controller.MeasureController

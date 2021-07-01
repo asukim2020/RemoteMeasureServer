@@ -13,7 +13,7 @@ public class MeasureController {
 
     @Autowired MeasureService measureService;
 
-    @GetMapping("/measure/post/setting")
+    @PostMapping("/measure/post/setting")
     @ResponseBody
     public MeasureSetting setMeasureSetting(
             @RequestParam("accel") String accel,
