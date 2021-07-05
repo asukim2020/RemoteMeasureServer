@@ -19,8 +19,12 @@ object FileUtil {
         }
     }
 
-    fun getHourString(): String {
+    fun get_HH_MM_String(): String {
         return Date().toString_HH_mm()
+    }
+
+    fun get_HH_MM_DD_String(): String {
+        return Date().toString_HH_mm_dd()
     }
 
     private fun removeDir(file: File) {

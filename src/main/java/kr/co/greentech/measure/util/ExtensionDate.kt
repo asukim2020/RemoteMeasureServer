@@ -305,6 +305,11 @@ fun Date.toString_HH_mm(): String {
     return sdf.format(this)
 }
 
+fun Date.toString_HH_mm_dd(): String {
+    val sdf = SimpleDateFormat("_HH_mm_dd")
+    return sdf.format(this)
+}
+
 fun Date.toString_yyyyMMdd_HHmmss(): String {
     val sdf = SimpleDateFormat("yyyyMMdd_HHmmss")
     return sdf.format(this)

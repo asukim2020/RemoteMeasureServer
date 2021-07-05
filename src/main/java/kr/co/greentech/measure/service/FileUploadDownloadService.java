@@ -2,7 +2,6 @@ package kr.co.greentech.measure.service;
 
 import kr.co.greentech.measure.domain.MeasureFile;
 import kr.co.greentech.measure.repository.FileUploadDownloadRepository;
-import kr.co.greentech.measure.repository.SensorItemRepository;
 import kr.co.greentech.measure.util.FileDownloadException;
 import kr.co.greentech.measure.util.FileUploadException;
 import kr.co.greentech.measure.util.FileUploadProperties;
@@ -66,7 +65,12 @@ public class FileUploadDownloadService {
     }
 
     public String storeFile(MultipartFile file, FilePath path) {
-        String fileName = StringUtils.cleanPath(path.toString().replace("/", "") + FileUtil.INSTANCE.getHourString() + ".csv");
+        String fileName = "";
+        if (path == FilePath.TRIGGER) {
+            fileName = StringUtils.cleanPath(path.toString().replace("/", "") + FileUtil.INSTANCE.get_HH_MM_DD_String() + ".csv");
+        } else {
+            fileName = StringUtils.cleanPath(path.toString().replace("/", "") + FileUtil.INSTANCE.get_HH_MM_String() + ".csv");
+        }
 
         try {
             // 파일명에 부적합 문자가 있는지 확인한다.
