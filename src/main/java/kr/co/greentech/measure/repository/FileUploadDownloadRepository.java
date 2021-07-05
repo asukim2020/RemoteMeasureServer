@@ -3,6 +3,7 @@ package kr.co.greentech.measure.repository;
 import kr.co.greentech.measure.domain.MeasureFile;
 import kr.co.greentech.measure.util.FileUtil;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,6 +29,17 @@ public class FileUploadDownloadRepository {
             System.out.println("MeasureFile 저장");
             em.persist(file);
         }
+    }
+
+    @Transactional
+    public void delete(Date date) {
+        if (date == null) return;
+
+        em.createQuery(
+                "delete from MeasureFile mf " +
+                        "WHERE mf.time < :time"
+        ).setParameter("time", date.getTime())
+        .executeUpdate();
     }
 
     private List<MeasureFile> findByURL(String url, Long startTime, Long endTime) {

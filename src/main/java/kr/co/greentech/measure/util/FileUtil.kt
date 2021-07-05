@@ -5,7 +5,7 @@ import java.util.*
 
 object FileUtil {
 
-    fun deleteFiles(date: Date, path: String) {
+    fun deleteFiles(date: Date, path: String): Date? {
         val deleteDate = date.prevWeek.prevWeek.startOfWeek
 
         for (i in -365 until 0) {
@@ -14,9 +14,11 @@ object FileUtil {
                 val file = File(path + "/" + nextDate.toString_yyyyMMdd())
                 removeDir(file)
             } catch (e: Exception) {
-
+                return null
             }
         }
+
+        return deleteDate
     }
 
     fun get_HH_MM_String(): String {
