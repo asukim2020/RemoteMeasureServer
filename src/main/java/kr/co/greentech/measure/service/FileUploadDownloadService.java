@@ -67,7 +67,7 @@ public class FileUploadDownloadService {
 
     public String storeFile(MultipartFile file, FilePath path) {
         String fileName = "";
-        if (path == FilePath.TRIGGER) {
+        if (path == FilePath.TRIGGER || path == FilePath.SLOPE_REQUEST || path == FilePath.ACCEL_REQUEST ) {
             fileName = StringUtils.cleanPath(path.toString().replace("/", "") + FileUtil.INSTANCE.get_HH_MM_DD_String() + ".csv");
         } else {
             fileName = StringUtils.cleanPath(path.toString().replace("/", "") + FileUtil.INSTANCE.get_HH_MM_String() + ".csv");
