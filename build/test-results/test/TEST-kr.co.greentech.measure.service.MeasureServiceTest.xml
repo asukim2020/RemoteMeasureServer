@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.co.greentech.measure.service.MeasureServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-05T08:21:26" hostname="DESKTOP-A43T7EC" time="0.018">
+<testsuite name="kr.co.greentech.measure.service.MeasureServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-06T08:52:32" hostname="DESKTOP-A43T7EC" time="0.02">
   <properties/>
-  <testcase name="measureStart()" classname="kr.co.greentech.measure.service.MeasureServiceTest" time="0.018"/>
+  <testcase name="measureStart()" classname="kr.co.greentech.measure.service.MeasureServiceTest" time="0.02"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
